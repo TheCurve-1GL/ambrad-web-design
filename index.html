@@ -48,7 +48,7 @@ section { padding-block: clamp(64px, 9vw, 112px); }
 .btn-line:hover { background: rgba(255,255,255,.08); transform: translateY(-2px); }
 .btn-ink { background: var(--ink); color: #fff; }
 .btn-ink:hover { background: var(--ink-2); transform: translateY(-2px); }
-.btn:focus-visible, input:focus-visible, textarea:focus-visible, summary:focus-visible, a:focus-visible { outline: 3px solid var(--lime); outline-offset: 3px; }
+.btn:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible, summary:focus-visible, a:focus-visible { outline: 3px solid var(--lime); outline-offset: 3px; }
 
 /* Sticky bar */
 .bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 50; background: var(--ink); color: #fff; }
@@ -198,8 +198,8 @@ details .a { padding: 0 0 22px; color: var(--muted); max-width: 60ch; }
 .fill em { font-style: normal; background: #fff; border: 1px dashed #9aa6ba; border-radius: 8px; padding: 4px 10px; font-weight: 500; color: var(--muted); }
 form { background: #fff; border-radius: 24px; padding: clamp(22px, 4vw, 36px); display: grid; gap: 18px; border: 2px solid var(--ink); box-shadow: 10px 10px 0 var(--ink); }
 label { display: grid; gap: 8px; font-weight: 700; font-size: 17px; }
-input, textarea { font: inherit; font-size: 18px; padding: 14px 16px; border: 2px solid var(--line); border-radius: 12px; color: var(--text); background: #fff; width: 100%; }
-input:hover, textarea:hover { border-color: #b7c1d1; }
+input, textarea, select { font: inherit; font-size: 18px; padding: 14px 16px; border: 2px solid var(--line); border-radius: 12px; color: var(--text); background: #fff; width: 100%; }
+input:hover, textarea:hover, select:hover { border-color: #b7c1d1; }
 textarea { min-height: 110px; resize: vertical; }
 form .btn { width: 100%; }
 .small { font-size: 15px; color: var(--muted); }
@@ -215,6 +215,7 @@ form .btn { width: 100%; }
 footer { background: var(--ink); color: #cfd6e4; padding-block: 52px 30px; font-size: 17px; }
 .fgrid { display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 28px; }
 .flogo { width: 150px; height: auto; display: block; margin-bottom: 20px; }
+footer a { color: #fff; text-decoration-color: var(--lime); text-underline-offset: 3px; }
 footer h4 { font-family: var(--display); font-size: 20px; color: #fff; margin: 0 0 10px; }
 footer p { margin-bottom: 6px; }
 .preview { margin-top: 36px; padding-top: 18px; border-top: 1px solid rgba(255,255,255,.14); font-size: 13px; color: #8695ae; }
@@ -230,11 +231,32 @@ footer p { margin-bottom: 6px; }
 
 .reveal { opacity: 0; transform: translateY(20px); transition: opacity .7s ease, transform .7s ease; }
 .reveal.in { opacity: 1; transform: none; }
+/* Skip link, numbered cards, meet Warren, back to top */
+.skip { position: absolute; left: 12px; top: -60px; z-index: 100; background: var(--lime); color: var(--lime-ink); font-weight: 700; padding: 10px 16px; border-radius: 10px; text-decoration: none; }
+.skip:focus { top: 12px; }
+.item { position: relative; }
+.item .num { position: absolute; top: 28px; right: 24px; font-family: var(--display); font-weight: 800; font-size: 32px; line-height: 1; color: #c3ccd9; }
+@media (max-width: 560px) { .item .num { top: 22px; right: 0; font-size: 24px; } }
+.meet .wrap { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 40px 72px; align-items: start; }
+.meet .who { display: flex; gap: 18px; align-items: center; margin-top: 26px; }
+.meet .mono { width: 76px; height: 76px; border-radius: 50%; background: var(--ink); color: var(--lime); font-family: var(--display); font-weight: 800; font-size: 30px; display: grid; place-items: center; flex: none; }
+.meet .who b { display: block; font-family: var(--display); font-size: 22px; }
+.meet .who span { color: var(--muted); font-size: 16px; }
+.meet ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 16px; }
+.meet li { display: grid; grid-template-columns: 30px 1fr; gap: 14px; align-items: start; font-size: 19px; }
+.meet li svg { width: 30px; height: 30px; color: var(--ink); background: var(--lime); border-radius: 50%; padding: 6px; }
+.meet li b { display: block; }
+.meet li span { color: var(--muted); font-size: 17px; }
+@media (max-width: 860px) { .meet .wrap { grid-template-columns: 1fr; } }
+.fbottom { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; margin-top: 36px; padding-top: 18px; border-top: 1px solid rgba(255,255,255,.14); font-size: 14px; color: #8695ae; }
+.totop { color: #fff; font-weight: 700; text-decoration: none; white-space: nowrap; }
+.totop:hover { text-decoration: underline; text-decoration-color: var(--lime); }
+
 @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } .btn, .step, .ico { transition: none; } html { scroll-behavior: auto; } }
 </style>
 </head>
 <body>
-
+<a class="skip" href="#main">Skip to main content</a>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <symbol id="i-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></symbol>
@@ -251,7 +273,7 @@ footer p { margin-bottom: 6px; }
   <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></symbol>
 </svg>
 
-<header class="bar">
+<header class="bar" id="top">
   <div class="wrap">
     <a class="logo" href="#top"><img src="data:image/png;base64,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" alt="" width="32" height="32">Ambrad Web Design</a>
     <nav aria-label="Main"><a href="#how">How it works</a><a href="#price">Price</a><a href="#faq">Questions</a></nav>
@@ -259,7 +281,7 @@ footer p { margin-bottom: 6px; }
   </div>
 </header>
 
-<main id="top">
+<main id="main">
   <section class="hero">
     <div class="wrap">
       <div>
@@ -310,12 +332,12 @@ footer p { margin-bottom: 6px; }
         <p>Every site has one job: turn visitors into phone calls and bookings.</p>
       </div>
       <div class="grid">
-        <div class="item reveal"><div class="ico"><svg aria-hidden="true"><use href="#i-tap"/></svg></div><h3>Call in one tap</h3><p>A call button on every screen, and fixed to the bottom on phones.</p></div>
-        <div class="item reveal"><div class="ico"><svg aria-hidden="true"><use href="#i-star"/></svg></div><h3>Your reviews up front</h3><p>Your real star rating and reviews, where customers see them first.</p></div>
-        <div class="item reveal"><div class="ico"><svg aria-hidden="true"><use href="#i-phone"/></svg></div><h3>Perfect on a phone</h3><p>Big text, big buttons, no pinching and zooming.</p></div>
-        <div class="item reveal"><div class="ico"><svg aria-hidden="true"><use href="#i-camera"/></svg></div><h3>Your own photos</h3><p>Your work, your team and your van. No stock photos.</p></div>
-        <div class="item reveal"><div class="ico"><svg aria-hidden="true"><use href="#i-chat"/></svg></div><h3>Callback form</h3><p>Customers can leave their number, even when you're busy on a job.</p></div>
-        <div class="item reveal"><div class="ico"><svg aria-hidden="true"><use href="#i-edit"/></svg></div><h3>One round of changes</h3><p>Tell me what to tweak, and I'll change it before it goes live.</p></div>
+        <div class="item reveal"><div class="ico"><svg aria-hidden="true"><use href="#i-tap"/></svg></div><span class="num" aria-hidden="true">01</span><h3>Call in one tap</h3><p>A call button on every screen, and fixed to the bottom on phones.</p></div>
+        <div class="item reveal"><div class="ico"><svg aria-hidden="true"><use href="#i-star"/></svg></div><span class="num" aria-hidden="true">02</span><h3>Your reviews up front</h3><p>Your real star rating and reviews, where customers see them first.</p></div>
+        <div class="item reveal"><div class="ico"><svg aria-hidden="true"><use href="#i-phone"/></svg></div><span class="num" aria-hidden="true">03</span><h3>Perfect on a phone</h3><p>Big text, big buttons, no pinching and zooming.</p></div>
+        <div class="item reveal"><div class="ico"><svg aria-hidden="true"><use href="#i-camera"/></svg></div><span class="num" aria-hidden="true">04</span><h3>Your own photos</h3><p>Your work, your team and your van. No stock photos.</p></div>
+        <div class="item reveal"><div class="ico"><svg aria-hidden="true"><use href="#i-chat"/></svg></div><span class="num" aria-hidden="true">05</span><h3>Callback form</h3><p>Customers can leave their number, even when you're busy on a job.</p></div>
+        <div class="item reveal"><div class="ico"><svg aria-hidden="true"><use href="#i-edit"/></svg></div><span class="num" aria-hidden="true">06</span><h3>One round of changes</h3><p>Tell me what to tweak, and I'll change it before it goes live.</p></div>
       </div>
     </div>
   </section>
@@ -327,6 +349,23 @@ footer p { margin-bottom: 6px; }
         <div class="step reveal"><div class="n">1</div><h3>I make a free preview</h3><p>I build your new website using your own reviews, services and details.</p></div>
         <div class="step reveal"><div class="n">2</div><h3>You look on your phone</h3><p>I send you the link or show you in person. Like it? Pay a £250 deposit.</p></div>
         <div class="step reveal"><div class="n">3</div><h3>Live in 48 hours</h3><p>I add your photos and changes, and it goes live. Then you pay the rest.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="meet get" id="about">
+    <div class="wrap">
+      <div class="reveal">
+        <p class="tag">Who you'll deal with</p>
+        <h2>One local person, start to finish</h2>
+        <div class="who"><div class="mono" aria-hidden="true">WB</div><div><b>Warren Bradley</b><span>Web designer, Childs Hill NW2</span></div></div>
+      </div>
+      <div class="reveal">
+        <ul>
+          <li><svg aria-hidden="true"><use href="#i-pin"/></svg><div><b>Down the road, not a call centre</b><span>I'm based in Childs Hill, so I can show you your preview in person.</span></div></li>
+          <li><svg aria-hidden="true"><use href="#i-phone"/></svg><div><b>You talk to me, every time</b><span>No account managers. Ring 07345 320489 and you get me.</span></div></li>
+          <li><svg aria-hidden="true"><use href="#i-eye"/></svg><div><b>See it before you pay</b><span>Your free preview comes first. You only pay once you've seen it and like it.</span></div></li>
+        </ul>
       </div>
     </div>
   </section>
@@ -380,9 +419,9 @@ footer p { margin-bottom: 6px; }
   <section class="contact" id="contact">
     <div class="wrap">
       <div class="side reveal">
-        <p class="tag">Free preview</p>
+        <p class="tag">I'd love to hear from you</p>
         <h2>Ask for your free preview</h2>
-        <p>Tell me your business name. I'll build your preview and send you the link.</p>
+        <p>Tell me your business name. I'll build your preview and send you the link. Got a question first? Pick it below and I'll call you back.</p>
         <div class="fill"><span>Phone <a href="tel:07345320489">07345 320489</a></span><span>Email <a href="mailto:WebDesign@ambrad.co.uk">WebDesign@ambrad.co.uk</a></span></div>
       </div>
       <div class="reveal">
@@ -391,6 +430,14 @@ footer p { margin-bottom: 6px; }
           <label>Your name<input name="name" autocomplete="name" required></label>
           <label>Your business<input name="biz" autocomplete="organization" required placeholder="For example: Hendon Plumbing"></label>
           <label>Phone number<input name="phone" type="tel" autocomplete="tel" inputmode="tel" required></label>
+          <label>My enquiry is about
+            <select name="enquiry">
+              <option>A free preview</option>
+              <option>A question about price</option>
+              <option>Updating my current site</option>
+              <option>Something else</option>
+            </select>
+          </label>
           <label>Your current website (if you have one)<input name="site" type="url" inputmode="url" placeholder="www."></label>
           <button class="btn btn-lime" type="submit"><svg aria-hidden="true"><use href="#i-eye"/></svg>Get my free preview</button>
           <p class="small" id="fmsg">I'll only use your details to reply about your website.</p>
@@ -418,6 +465,7 @@ footer p { margin-bottom: 6px; }
       <div><h4>Contact</h4><p><a href="tel:07345320489">07345 320489</a></p><p><a href="mailto:WebDesign@ambrad.co.uk">WebDesign@ambrad.co.uk</a></p></div>
       <div><h4>Areas covered</h4><p>London</p></div>
     </div>
+    <div class="fbottom"><span>© 2026 Ambrad Web Design</span><a class="totop" href="#top">Back to top ↑</a></div>
   </div>
 </footer>
 
