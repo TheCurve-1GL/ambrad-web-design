@@ -2,6 +2,8 @@
 <html lang="en-GB">
 <head>
 <meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src https://formspree.io; form-action https://formspree.io; base-uri 'self'; object-src 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Ambrad Web Design | Websites for London businesses</title>
 <meta name="description" content="Ambrad Web Design builds websites for local businesses in and around London. See a free preview of your new website before you pay. £500, live within 48 hours.">
@@ -217,6 +219,9 @@ footer { background: var(--ink); color: #cfd6e4; padding-block: 52px 30px; font-
 .flogo { width: 150px; height: auto; display: block; margin-bottom: 20px; }
 footer h4 { font-family: var(--display); font-size: 20px; color: #fff; margin: 0 0 10px; }
 footer p { margin-bottom: 6px; }
+footer a { color: #fff; }
+.legal { margin-top: 36px; padding-top: 18px; border-top: 1px solid rgba(255,255,255,.14); font-size: 14px; color: #a9b4c8; }
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
 .preview { margin-top: 36px; padding-top: 18px; border-top: 1px solid rgba(255,255,255,.14); font-size: 13px; color: #8695ae; }
 @media (max-width: 760px) { .fgrid { grid-template-columns: 1fr; } }
 
@@ -388,12 +393,14 @@ footer p { margin-bottom: 6px; }
       <div class="reveal">
         <form id="f" action="https://formspree.io/f/xljjjyro" method="POST" novalidate>
           <input type="hidden" name="_subject" value="New free preview request - Ambrad Web Design">
+          <input type="text" name="_gotcha" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
           <label>Your name<input name="name" autocomplete="name" required></label>
           <label>Your business<input name="biz" autocomplete="organization" required placeholder="For example: Hendon Plumbing"></label>
           <label>Phone number<input name="phone" type="tel" autocomplete="tel" inputmode="tel" required></label>
           <label>Your current website (if you have one)<input name="site" type="url" inputmode="url" placeholder="www."></label>
           <button class="btn btn-lime" type="submit"><svg aria-hidden="true"><use href="#i-eye"/></svg>Get my free preview</button>
           <p class="small" id="fmsg">I'll only use your details to reply about your website.</p>
+          <p class="small">See how I look after your details in my <a href="privacy.html">privacy notice</a>.</p>
         </form>
         <div class="thanks" id="thanks" hidden role="status">
           <h3>Thanks, <span id="tn">got it</span>!</h3>
@@ -418,6 +425,7 @@ footer p { margin-bottom: 6px; }
       <div><h4>Contact</h4><p><a href="tel:07345320489">07345 320489</a></p><p><a href="mailto:WebDesign@ambrad.co.uk">WebDesign@ambrad.co.uk</a></p></div>
       <div><h4>Areas covered</h4><p>London</p></div>
     </div>
+    <p class="legal"><a href="privacy.html">Privacy notice</a><br>Ambrad Web Design is a trading name of Ambrad Consulting Ltd, registered in England and Wales, company number 15680995. Registered office: Suite A4, Skylon Court, Coldnose Road, Rotherwas, Hereford, HR2 6JS.</p>
   </div>
 </footer>
 
